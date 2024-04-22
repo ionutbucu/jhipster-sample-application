@@ -1,0 +1,25 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "reportSchedule": {
+      "home": {
+        "title": "Report Schedules",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Report Schedule",
+        "createOrEditLabel": "Create or edit a Report Schedule",
+        "notFound": "No Report Schedules found"
+      },
+      "created": "A new Report Schedule is created with identifier {{ param }}",
+      "updated": "A Report Schedule is updated with identifier {{ param }}",
+      "deleted": "A Report Schedule is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Report Schedule {{ id }}?"
+      },
+      "detail": {
+        "title": "Report Schedule"
+      },
+      "rid": "Rid",
+      "cron": "Cron",
+      "report": "Report"
+    }
+  }
+}

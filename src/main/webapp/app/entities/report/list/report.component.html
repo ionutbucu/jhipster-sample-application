@@ -1,0 +1,199 @@
+<div>
+  <h2 id="page-heading" data-cy="ReportHeading">
+    <span jhiTranslate="jhipsterSampleApplicationApp.report.home.title">Reports</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipsterSampleApplicationApp.report.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-report"
+        [routerLink]="['/report/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipsterSampleApplicationApp.report.home.createLabel">Create a new Report</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (reports?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="jhipsterSampleApplicationApp.report.home.notFound">No Reports found</span>
+    </div>
+  }
+
+  @if (reports && reports.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="rid">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.report.rid">Rid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cid">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.report.cid">Cid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.report.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.report.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="query">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.report.query">Query</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="queryType">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.report.queryType">Query Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fileName">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.report.fileName">File Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="reportType">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.report.reportType">Report Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="licenseHolder">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.report.licenseHolder">License Holder</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="owner">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.report.owner">Owner</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="datasource.rid">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.report.datasource">Datasource</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="metadata.rid">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.report.metadata">Metadata</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (report of reports; track trackRid) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/report', report.rid, 'view']">{{ report.rid }}</a>
+              </td>
+              <td>{{ report.cid }}</td>
+              <td>{{ report.name }}</td>
+              <td>{{ report.description }}</td>
+              <td>{{ report.query }}</td>
+              <td [jhiTranslate]="'jhipsterSampleApplicationApp.QueryType.' + (report.queryType ?? 'null')">
+                {{ { null: '', NATIVE_QUERY: 'NATIVE_QUERY', HQL: 'HQL' }[report.queryType ?? 'null'] }}
+              </td>
+              <td>{{ report.fileName }}</td>
+              <td [jhiTranslate]="'jhipsterSampleApplicationApp.ReportType.' + (report.reportType ?? 'null')">
+                {{ { null: '', CSV: 'CSV', PDF: 'PDF', XLS: 'XLS', HTML: 'HTML', TABLE: 'TABLE' }[report.reportType ?? 'null'] }}
+              </td>
+              <td>{{ report.licenseHolder }}</td>
+              <td>{{ report.owner }}</td>
+              <td>
+                @if (report.datasource) {
+                  <div>
+                    <a [routerLink]="['/report-data-source', report.datasource.rid, 'view']">{{ report.datasource.rid }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (report.metadata) {
+                  <div>
+                    <a [routerLink]="['/report-metadata', report.metadata.rid, 'view']">{{ report.metadata.rid }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/report', report.rid, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/report', report.rid, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(report)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (reports && reports.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

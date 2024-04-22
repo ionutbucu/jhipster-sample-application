@@ -1,0 +1,80 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-report-schedule-heading"
+        data-cy="ReportScheduleCreateUpdateHeading"
+        jhiTranslate="jhipsterSampleApplicationApp.reportSchedule.home.createOrEditLabel"
+      >
+        Create or edit a Report Schedule
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_rid" jhiTranslate="jhipsterSampleApplicationApp.reportSchedule.rid">Rid</label>
+          <input
+            type="text"
+            class="form-control"
+            name="rid"
+            id="field_rid"
+            data-cy="rid"
+            formControlName="rid"
+            [readonly]="editForm.get('rid')!.disabled"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_cron" jhiTranslate="jhipsterSampleApplicationApp.reportSchedule.cron">Cron</label>
+          <input type="text" class="form-control" name="cron" id="field_cron" data-cy="cron" formControlName="cron" />
+          @if (editForm.get('cron')!.invalid && (editForm.get('cron')!.dirty || editForm.get('cron')!.touched)) {
+            <div>
+              @if (editForm.get('cron')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('cron')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '20' }"
+                  >This field cannot be longer than 20 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_report" jhiTranslate="jhipsterSampleApplicationApp.reportSchedule.report">Report</label>
+          <select
+            class="form-control"
+            id="field_report"
+            data-cy="report"
+            name="report"
+            formControlName="report"
+            [compareWith]="compareReport"
+          >
+            <option [ngValue]="null"></option>
+            @for (reportOption of reportsSharedCollection; track $index) {
+              <option [ngValue]="reportOption">{{ reportOption.rid }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

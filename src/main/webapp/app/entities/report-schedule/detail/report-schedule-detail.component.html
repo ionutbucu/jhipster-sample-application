@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (reportSchedule()) {
+      <div>
+        <h2 data-cy="reportScheduleDetailsHeading">
+          <span jhiTranslate="jhipsterSampleApplicationApp.reportSchedule.detail.title">Report Schedule</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportSchedule.rid">Rid</span></dt>
+          <dd>
+            <span>{{ reportSchedule()!.rid }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportSchedule.cron">Cron</span></dt>
+          <dd>
+            <span>{{ reportSchedule()!.cron }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportSchedule.report">Report</span></dt>
+          <dd>
+            @if (reportSchedule()!.report) {
+              <div>
+                <a [routerLink]="['/report', reportSchedule()!.report?.rid, 'view']">{{ reportSchedule()!.report?.rid }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/report-schedule', reportSchedule()!.rid, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,119 @@
+{
+  "annotations": {
+    "changelogDate": "20240422154931"
+  },
+  "applications": "*",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "rid",
+      "fieldType": "String",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "cid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength"],
+      "fieldValidateRulesMinlength": "3"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "512"
+    },
+    {
+      "fieldName": "query",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "10000",
+      "fieldValidateRulesMinlength": "10"
+    },
+    {
+      "fieldName": "queryType",
+      "fieldType": "QueryType",
+      "fieldValues": "NATIVE_QUERY,HQL"
+    },
+    {
+      "fieldName": "fileName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength"],
+      "fieldValidateRulesMinlength": "3"
+    },
+    {
+      "fieldName": "reportType",
+      "fieldType": "ReportType",
+      "fieldValues": "CSV,PDF,XLS,HTML,TABLE"
+    },
+    {
+      "fieldName": "licenseHolder",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "owner",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Report",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "reportDataSource",
+      "otherEntityRelationshipName": "report",
+      "relationshipName": "datasource",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "reportMetadata",
+      "otherEntityRelationshipName": "report",
+      "relationshipName": "metadata",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "reportSchedule",
+      "otherEntityRelationshipName": "report",
+      "relationshipName": "schedules",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "reportDistribution",
+      "otherEntityRelationshipName": "report",
+      "relationshipName": "distributions",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "reportExecution",
+      "otherEntityRelationshipName": "report",
+      "relationshipName": "executions",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "reportParam",
+      "otherEntityRelationshipName": "report",
+      "relationshipName": "parameters",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "reportColumnMapping",
+      "otherEntityRelationshipName": "report",
+      "relationshipName": "columns",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

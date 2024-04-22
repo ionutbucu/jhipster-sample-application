@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (reportDistribution()) {
+      <div>
+        <h2 data-cy="reportDistributionDetailsHeading">
+          <span jhiTranslate="jhipsterSampleApplicationApp.reportDistribution.detail.title">Report Distribution</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportDistribution.rid">Rid</span></dt>
+          <dd>
+            <span>{{ reportDistribution()!.rid }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportDistribution.email">Email</span></dt>
+          <dd>
+            <span>{{ reportDistribution()!.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportDistribution.description">Description</span></dt>
+          <dd>
+            <span>{{ reportDistribution()!.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportDistribution.report">Report</span></dt>
+          <dd>
+            @if (reportDistribution()!.report) {
+              <div>
+                <a [routerLink]="['/report', reportDistribution()!.report?.rid, 'view']">{{ reportDistribution()!.report?.rid }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/report-distribution', reportDistribution()!.rid, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

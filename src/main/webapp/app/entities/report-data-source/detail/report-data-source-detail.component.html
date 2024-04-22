@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (reportDataSource()) {
+      <div>
+        <h2 data-cy="reportDataSourceDetailsHeading">
+          <span jhiTranslate="jhipsterSampleApplicationApp.reportDataSource.detail.title">Report Data Source</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportDataSource.rid">Rid</span></dt>
+          <dd>
+            <span>{{ reportDataSource()!.rid }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportDataSource.type">Type</span></dt>
+          <dd>
+            <span>{{ reportDataSource()!.type }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportDataSource.url">Url</span></dt>
+          <dd>
+            <span>{{ reportDataSource()!.url }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportDataSource.user">User</span></dt>
+          <dd>
+            <span>{{ reportDataSource()!.user }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportDataSource.password">Password</span></dt>
+          <dd>
+            <span>{{ reportDataSource()!.password }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/report-data-source', reportDataSource()!.rid, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>
