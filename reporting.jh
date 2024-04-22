@@ -1,0 +1,101 @@
+
+entity Report {
+	@Id rid String
+    cid String
+	name String required minlength(3)
+    description String maxlength(512)
+    query String required minlength(10) maxlength(10000)
+    queryType QueryType
+    fileName String required minlength(3)
+    reportType ReportType
+    licenseHolder String
+    owner String
+}
+
+enum QueryType {
+	NATIVE_QUERY,
+    HQL
+}
+
+enum ReportType {
+   CSV,
+   PDF,
+   XLS,
+   HTML,
+   TABLE
+}
+
+entity ReportParam {
+	@Id rid String
+	name String
+    type String
+    value String
+    conversionRule String
+}
+entity ReportDataSource {
+	@Id rid String
+	type String
+    url String
+    user String
+    password String
+}
+entity ReportMetadata {
+	@Id rid String
+    metadata TextBlob
+}
+
+entity ReportSchedule {
+	@Id rid String
+	cron String required maxlength(20)
+}
+
+
+// an ignored comment
+/** not an ignored comment */
+entity ReportDistribution {
+	@Id rid String
+	email String required minlength(3) pattern(/^[^@]+@[^@]+$/)
+    description String maxlength(256)
+}
+
+entity ReportExecution {
+	@Id rid String
+	date Instant required
+    error String maxlength(256)
+    url String
+    user String
+    additionalInfo String
+}
+
+entity ReportColumnMapping {
+	@Id rid String
+    sourceColumnName String
+    sourceColumnIndex Integer
+    columnTitle String
+    lang String
+}
+
+relationship OneToMany {
+	Report{schedules} to ReportSchedule{report}
+	Report{distributions} to ReportDistribution{report}
+    Report{executions} to ReportExecution{report}
+    Report{parameters} to ReportParam{report}
+    Report{columns} to ReportColumnMapping{report}
+    
+}
+relationship OneToOne {
+	Report{datasource} to ReportDataSource{report}
+    Report{metadata} to ReportMetadata{report}
+}
+
+
+
+// Set pagination options
+paginate Report, ReportExecution with pagination
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all
+service all with serviceClass
+

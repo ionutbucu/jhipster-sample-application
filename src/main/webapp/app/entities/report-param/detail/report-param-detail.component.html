@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (reportParam()) {
+      <div>
+        <h2 data-cy="reportParamDetailsHeading">
+          <span jhiTranslate="jhipsterSampleApplicationApp.reportParam.detail.title">Report Param</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportParam.rid">Rid</span></dt>
+          <dd>
+            <span>{{ reportParam()!.rid }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportParam.name">Name</span></dt>
+          <dd>
+            <span>{{ reportParam()!.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportParam.type">Type</span></dt>
+          <dd>
+            <span>{{ reportParam()!.type }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportParam.value">Value</span></dt>
+          <dd>
+            <span>{{ reportParam()!.value }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportParam.conversionRule">Conversion Rule</span></dt>
+          <dd>
+            <span>{{ reportParam()!.conversionRule }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportParam.report">Report</span></dt>
+          <dd>
+            @if (reportParam()!.report) {
+              <div>
+                <a [routerLink]="['/report', reportParam()!.report?.rid, 'view']">{{ reportParam()!.report?.rid }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/report-param', reportParam()!.rid, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

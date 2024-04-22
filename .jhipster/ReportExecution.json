@@ -1,0 +1,53 @@
+{
+  "annotations": {
+    "changelogDate": "20240422154937"
+  },
+  "applications": "*",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "rid",
+      "fieldType": "String",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "error",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "256"
+    },
+    {
+      "fieldName": "url",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "user",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "additionalInfo",
+      "fieldType": "String"
+    }
+  ],
+  "name": "ReportExecution",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "report",
+      "otherEntityRelationshipName": "executions",
+      "relationshipName": "report",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

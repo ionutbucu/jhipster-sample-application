@@ -1,0 +1,107 @@
+<div>
+  <h2 id="page-heading" data-cy="ReportScheduleHeading">
+    <span jhiTranslate="jhipsterSampleApplicationApp.reportSchedule.home.title">Report Schedules</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipsterSampleApplicationApp.reportSchedule.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-report-schedule"
+        [routerLink]="['/report-schedule/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipsterSampleApplicationApp.reportSchedule.home.createLabel">Create a new Report Schedule</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (reportSchedules?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="jhipsterSampleApplicationApp.reportSchedule.home.notFound">No Report Schedules found</span>
+    </div>
+  }
+
+  @if (reportSchedules && reportSchedules.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="rid">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.reportSchedule.rid">Rid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cron">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.reportSchedule.cron">Cron</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="report.rid">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.reportSchedule.report">Report</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (reportSchedule of reportSchedules; track trackRid) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/report-schedule', reportSchedule.rid, 'view']">{{ reportSchedule.rid }}</a>
+              </td>
+              <td>{{ reportSchedule.cron }}</td>
+              <td>
+                @if (reportSchedule.report) {
+                  <div>
+                    <a [routerLink]="['/report', reportSchedule.report.rid, 'view']">{{ reportSchedule.report.rid }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/report-schedule', reportSchedule.rid, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/report-schedule', reportSchedule.rid, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(reportSchedule)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

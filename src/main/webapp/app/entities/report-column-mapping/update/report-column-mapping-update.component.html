@@ -1,0 +1,116 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-report-column-mapping-heading"
+        data-cy="ReportColumnMappingCreateUpdateHeading"
+        jhiTranslate="jhipsterSampleApplicationApp.reportColumnMapping.home.createOrEditLabel"
+      >
+        Create or edit a Report Column Mapping
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_rid" jhiTranslate="jhipsterSampleApplicationApp.reportColumnMapping.rid">Rid</label>
+          <input
+            type="text"
+            class="form-control"
+            name="rid"
+            id="field_rid"
+            data-cy="rid"
+            formControlName="rid"
+            [readonly]="editForm.get('rid')!.disabled"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_sourceColumnName"
+            jhiTranslate="jhipsterSampleApplicationApp.reportColumnMapping.sourceColumnName"
+            >Source Column Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="sourceColumnName"
+            id="field_sourceColumnName"
+            data-cy="sourceColumnName"
+            formControlName="sourceColumnName"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_sourceColumnIndex"
+            jhiTranslate="jhipsterSampleApplicationApp.reportColumnMapping.sourceColumnIndex"
+            >Source Column Index</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="sourceColumnIndex"
+            id="field_sourceColumnIndex"
+            data-cy="sourceColumnIndex"
+            formControlName="sourceColumnIndex"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_columnTitle" jhiTranslate="jhipsterSampleApplicationApp.reportColumnMapping.columnTitle"
+            >Column Title</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="columnTitle"
+            id="field_columnTitle"
+            data-cy="columnTitle"
+            formControlName="columnTitle"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lang" jhiTranslate="jhipsterSampleApplicationApp.reportColumnMapping.lang">Lang</label>
+          <input type="text" class="form-control" name="lang" id="field_lang" data-cy="lang" formControlName="lang" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_report" jhiTranslate="jhipsterSampleApplicationApp.reportColumnMapping.report">Report</label>
+          <select
+            class="form-control"
+            id="field_report"
+            data-cy="report"
+            name="report"
+            formControlName="report"
+            [compareWith]="compareReport"
+          >
+            <option [ngValue]="null"></option>
+            @for (reportOption of reportsSharedCollection; track $index) {
+              <option [ngValue]="reportOption">{{ reportOption.rid }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "ReportType": {
+      "null": "",
+      "CSV": "CSV",
+      "PDF": "PDF",
+      "XLS": "XLS",
+      "HTML": "HTML",
+      "TABLE": "TABLE"
+    }
+  }
+}

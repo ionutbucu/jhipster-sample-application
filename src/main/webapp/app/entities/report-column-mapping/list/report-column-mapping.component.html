@@ -1,0 +1,131 @@
+<div>
+  <h2 id="page-heading" data-cy="ReportColumnMappingHeading">
+    <span jhiTranslate="jhipsterSampleApplicationApp.reportColumnMapping.home.title">Report Column Mappings</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipsterSampleApplicationApp.reportColumnMapping.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-report-column-mapping"
+        [routerLink]="['/report-column-mapping/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipsterSampleApplicationApp.reportColumnMapping.home.createLabel">Create a new Report Column Mapping</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (reportColumnMappings?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="jhipsterSampleApplicationApp.reportColumnMapping.home.notFound">No Report Column Mappings found</span>
+    </div>
+  }
+
+  @if (reportColumnMappings && reportColumnMappings.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="rid">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.reportColumnMapping.rid">Rid</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sourceColumnName">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.reportColumnMapping.sourceColumnName">Source Column Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sourceColumnIndex">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.reportColumnMapping.sourceColumnIndex">Source Column Index</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="columnTitle">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.reportColumnMapping.columnTitle">Column Title</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lang">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.reportColumnMapping.lang">Lang</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="report.rid">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterSampleApplicationApp.reportColumnMapping.report">Report</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (reportColumnMapping of reportColumnMappings; track trackRid) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/report-column-mapping', reportColumnMapping.rid, 'view']">{{ reportColumnMapping.rid }}</a>
+              </td>
+              <td>{{ reportColumnMapping.sourceColumnName }}</td>
+              <td>{{ reportColumnMapping.sourceColumnIndex }}</td>
+              <td>{{ reportColumnMapping.columnTitle }}</td>
+              <td>{{ reportColumnMapping.lang }}</td>
+              <td>
+                @if (reportColumnMapping.report) {
+                  <div>
+                    <a [routerLink]="['/report', reportColumnMapping.report.rid, 'view']">{{ reportColumnMapping.report.rid }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/report-column-mapping', reportColumnMapping.rid, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/report-column-mapping', reportColumnMapping.rid, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(reportColumnMapping)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

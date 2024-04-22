@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (report()) {
+      <div>
+        <h2 data-cy="reportDetailsHeading"><span jhiTranslate="jhipsterSampleApplicationApp.report.detail.title">Report</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.report.rid">Rid</span></dt>
+          <dd>
+            <span>{{ report()!.rid }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.report.cid">Cid</span></dt>
+          <dd>
+            <span>{{ report()!.cid }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.report.name">Name</span></dt>
+          <dd>
+            <span>{{ report()!.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.report.description">Description</span></dt>
+          <dd>
+            <span>{{ report()!.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.report.query">Query</span></dt>
+          <dd>
+            <span>{{ report()!.query }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.report.queryType">Query Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'jhipsterSampleApplicationApp.QueryType.' + (report()!.queryType ?? 'null')">{{
+              { null: '', NATIVE_QUERY: 'NATIVE_QUERY', HQL: 'HQL' }[report()!.queryType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.report.fileName">File Name</span></dt>
+          <dd>
+            <span>{{ report()!.fileName }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.report.reportType">Report Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'jhipsterSampleApplicationApp.ReportType.' + (report()!.reportType ?? 'null')">{{
+              { null: '', CSV: 'CSV', PDF: 'PDF', XLS: 'XLS', HTML: 'HTML', TABLE: 'TABLE' }[report()!.reportType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.report.licenseHolder">License Holder</span></dt>
+          <dd>
+            <span>{{ report()!.licenseHolder }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.report.owner">Owner</span></dt>
+          <dd>
+            <span>{{ report()!.owner }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.report.datasource">Datasource</span></dt>
+          <dd>
+            @if (report()!.datasource) {
+              <div>
+                <a [routerLink]="['/report-data-source', report()!.datasource?.rid, 'view']">{{ report()!.datasource?.rid }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.report.metadata">Metadata</span></dt>
+          <dd>
+            @if (report()!.metadata) {
+              <div>
+                <a [routerLink]="['/report-metadata', report()!.metadata?.rid, 'view']">{{ report()!.metadata?.rid }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/report', report()!.rid, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (reportExecution()) {
+      <div>
+        <h2 data-cy="reportExecutionDetailsHeading">
+          <span jhiTranslate="jhipsterSampleApplicationApp.reportExecution.detail.title">Report Execution</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportExecution.rid">Rid</span></dt>
+          <dd>
+            <span>{{ reportExecution()!.rid }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportExecution.date">Date</span></dt>
+          <dd>
+            <span>{{ reportExecution()!.date | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportExecution.error">Error</span></dt>
+          <dd>
+            <span>{{ reportExecution()!.error }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportExecution.url">Url</span></dt>
+          <dd>
+            <span>{{ reportExecution()!.url }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportExecution.user">User</span></dt>
+          <dd>
+            <span>{{ reportExecution()!.user }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportExecution.additionalInfo">Additional Info</span></dt>
+          <dd>
+            <span>{{ reportExecution()!.additionalInfo }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterSampleApplicationApp.reportExecution.report">Report</span></dt>
+          <dd>
+            @if (reportExecution()!.report) {
+              <div>
+                <a [routerLink]="['/report', reportExecution()!.report?.rid, 'view']">{{ reportExecution()!.report?.rid }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/report-execution', reportExecution()!.rid, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,28 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "reportParam": {
+      "home": {
+        "title": "Report Params",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Report Param",
+        "createOrEditLabel": "Create or edit a Report Param",
+        "notFound": "No Report Params found"
+      },
+      "created": "A new Report Param is created with identifier {{ param }}",
+      "updated": "A Report Param is updated with identifier {{ param }}",
+      "deleted": "A Report Param is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Report Param {{ id }}?"
+      },
+      "detail": {
+        "title": "Report Param"
+      },
+      "rid": "Rid",
+      "name": "Name",
+      "type": "Type",
+      "value": "Value",
+      "conversionRule": "Conversion Rule",
+      "report": "Report"
+    }
+  }
+}

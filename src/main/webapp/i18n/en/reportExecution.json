@@ -1,0 +1,29 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "reportExecution": {
+      "home": {
+        "title": "Report Executions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Report Execution",
+        "createOrEditLabel": "Create or edit a Report Execution",
+        "notFound": "No Report Executions found"
+      },
+      "created": "A new Report Execution is created with identifier {{ param }}",
+      "updated": "A Report Execution is updated with identifier {{ param }}",
+      "deleted": "A Report Execution is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Report Execution {{ id }}?"
+      },
+      "detail": {
+        "title": "Report Execution"
+      },
+      "rid": "Rid",
+      "date": "Date",
+      "error": "Error",
+      "url": "Url",
+      "user": "User",
+      "additionalInfo": "Additional Info",
+      "report": "Report"
+    }
+  }
+}

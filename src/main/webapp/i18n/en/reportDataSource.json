@@ -1,0 +1,28 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "reportDataSource": {
+      "home": {
+        "title": "Report Data Sources",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Report Data Source",
+        "createOrEditLabel": "Create or edit a Report Data Source",
+        "notFound": "No Report Data Sources found"
+      },
+      "created": "A new Report Data Source is created with identifier {{ param }}",
+      "updated": "A Report Data Source is updated with identifier {{ param }}",
+      "deleted": "A Report Data Source is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Report Data Source {{ id }}?"
+      },
+      "detail": {
+        "title": "Report Data Source"
+      },
+      "rid": "Rid",
+      "type": "Type",
+      "url": "Url",
+      "user": "User",
+      "password": "Password",
+      "report": "Report"
+    }
+  }
+}
